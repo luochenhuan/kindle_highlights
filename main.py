@@ -18,9 +18,9 @@ def parse(html_doc):
     soup = bs4.BeautifulSoup(html_doc, 'html.parser')
     book_title = soup.find('div', {'class': 'bookTitle'}).text.strip()
     book_ref = db.collection('books').document(book_title)
-    highlights_ref = book_ref.collection('highlights')
+    notebooks_ref = book_ref.collection('notebooks')
     for section in soup.find_all('div', {'class': 'sectionHeading'}):
-        section_ref = highlights_ref.document(section.text.strip())
+        section_ref = notebooks_ref.document(section.text.strip())
 
         for div in section.next_siblings:
             if isinstance(div, bs4.element.NavigableString):
