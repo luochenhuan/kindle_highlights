@@ -63,6 +63,7 @@ def read_gcs():
         if not m:
             return ('No resourcename attribute', 500)
         if m.group(1) == gcs_bucket:
+            print(f"resource: {m.group(0)}")
             bucket = storage_client.get_bucket(m.group(1))
             blob = bucket.get_blob(m.group(2))
             temp_file_name = m.group(2)
